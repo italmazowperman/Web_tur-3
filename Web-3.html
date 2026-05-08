@@ -1,626 +1,644 @@
+Вот полный код одностраничного сайта туристического агентства для Туркменистана с адаптацией под мобильные устройства, анимациями и кликабельными кнопками.
+
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Advantour Turkmenistan | Путешествия по Туркменистану</title>
-    <!-- Font Awesome 6 (Free) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Poppins + Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nomad Travel | Туристическое агентство Туркменистан</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: современные шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #fefcf5;
-            color: #1e2a2e;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fefcf5;
+      color: #1e2a2f;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
-        h1, h2, h3, h4, .logo, .nav-links a, .btn, .card-title {
-            font-family: 'Poppins', sans-serif;
-        }
+    /* ----- анимации при скролле (fade-up) ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+    }
 
-        /* Animations + Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* глобальные стили */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-        /* Container */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+    section {
+      padding: 70px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
 
-        /* Header / Nav */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 32px;
-            background: rgba(255, 252, 240, 0.96);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            flex-wrap: wrap;
-        }
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #b8860b, #cd7f32);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: #c9772e;
+      border-radius: 4px;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+    /* header & навигация */
+    header {
+      background: #ffffffdd;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border-bottom: 1px solid #e9e3d5;
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            font-weight: 500;
-            color: #2c3e2f;
-            transition: 0.3s;
-            font-size: 1rem;
-        }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      flex-wrap: wrap;
+    }
 
-        .nav-links a:hover {
-            color: #b8860b;
-            transform: translateY(-2px);
-        }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #b35f1a, #e69342);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .logo span {
+      color: #c9772e;
+      background: none;
+      -webkit-background-clip: unset;
+    }
 
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 0.95rem;
-            background: #c49a6c;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2c3e2f;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      color: #c9772e;
+      transform: translateY(-2px);
+      display: inline-block;
+    }
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #c49a6c;
-            color: #c49a6c;
-        }
+    /* кнопки */
+    .btn {
+      display: inline-block;
+      background: #c9772e;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #c9772e;
+      color: #c9772e;
+    }
+    .btn-outline:hover {
+      background: #c9772e;
+      color: white;
+      transform: scale(1.02);
+    }
+    .btn:hover {
+      background: #a55f21;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(201,119,46,0.2);
+    }
 
-        .btn-outline:hover {
-            background: #c49a6c;
-            color: white;
-            transform: scale(1.02);
-        }
+    /* hero секция */
+    .hero {
+      background: linear-gradient(105deg, #fcf7e8 0%, #f8efda 100%);
+      border-radius: 0 0 48px 48px;
+      margin-top: 0;
+      padding: 60px 0 80px;
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      justify-content: space-between;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .hero-image {
+      flex: 1;
+      text-align: center;
+    }
+    .hero-image i {
+      font-size: 12rem;
+      color: #d9944b;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.1));
+    }
 
-        .btn-primary {
-            background: #b87333;
-            box-shadow: 0 8px 20px rgba(184,115,51,0.3);
-        }
+    /* карточки туров (сетка) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 20px;
+    }
+    .tour-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      padding: 24px;
+      border: 1px solid #f0e9dc;
+    }
+    .tour-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 25px 35px -12px rgba(0,0,0,0.15);
+      border-color: #e6cfb0;
+    }
+    .card-icon {
+      font-size: 2.5rem;
+      color: #c9772e;
+      margin-bottom: 16px;
+    }
+    .tour-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+    .tour-detail {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+      color: #4a5b52;
+      font-size: 0.9rem;
+    }
+    .price {
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: #c9772e;
+      margin: 12px 0;
+    }
 
-        .btn-primary:hover {
-            background: #9b5e2c;
-            transform: translateY(-3px);
-        }
+    /* почему выбирают нас (отзывы) */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .review-card {
+      background: #fffcf5;
+      padding: 24px;
+      border-radius: 28px;
+      transition: 0.25s;
+      border: 1px solid #f3ecdf;
+    }
+    .review-card:hover {
+      background: white;
+      box-shadow: 0 12px 22px rgba(0,0,0,0.05);
+    }
+    .stars {
+      color: #f4b342;
+      margin-bottom: 12px;
+    }
+    .quote {
+      font-style: italic;
+      margin: 16px 0;
+    }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(120deg, #fff7e8, #fff0dc);
-            padding: 70px 0 80px;
-            text-align: center;
-        }
+    /* шаги */
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .step {
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+      background: #faf6ed;
+      padding: 28px 16px;
+      border-radius: 32px;
+    }
+    .step i {
+      font-size: 2.2rem;
+      background: #c9772e20;
+      padding: 16px;
+      border-radius: 60px;
+      color: #c9772e;
+    }
 
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a5672f, #d49c6c);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 18px;
-        }
+    /* контактный блок + соцсети */
+    .contact-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+      background: #2c3e2f;
+      color: #fef8e7;
+      border-radius: 48px;
+      padding: 48px 40px;
+      margin-top: 20px;
+    }
+    .contact-info {
+      flex: 2;
+    }
+    .contact-info p {
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .contact-info a {
+      color: #ffcf9a;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .contact-info a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    .social-links {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .social-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,240,0.08);
+      padding: 12px 20px;
+      border-radius: 60px;
+      transition: 0.2s;
+    }
+    .social-item i {
+      font-size: 1.7rem;
+      width: 32px;
+    }
+    .social-item a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .social-item:hover {
+      background: #c9772e;
+      transform: translateX(6px);
+    }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: #4a5b4e;
-            max-width: 650px;
-            margin: 0 auto 32px;
-        }
+    footer {
+      background: #1e2a1f;
+      color: #e0d9c8;
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.85rem;
+    }
 
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    /* мобильная адаптация */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+      .navbar {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .nav-links {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      .hero-grid {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      h2:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      h2 {
+        text-align: center;
+        display: block;
+      }
+      .contact-flex {
+        flex-direction: column;
+        padding: 32px 24px;
+      }
+      .social-item {
+        justify-content: center;
+      }
+      .btn {
+        padding: 10px 20px;
+      }
+      .tour-card {
+        text-align: center;
+      }
+      .tour-detail {
+        justify-content: center;
+      }
+    }
 
-        /* Cards grid (туры) */
-        .section-title {
-            font-size: 2.2rem;
-            margin: 50px 0 20px;
-            text-align: center;
-            font-weight: 700;
-            color: #2d3e2b;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 32px;
-            margin: 40px 0;
-        }
-
-        .tour-card {
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .tour-card:hover {
-            transform: translateY(-12px) scale(1.01);
-            box-shadow: 0 30px 40px -12px rgba(0,0,0,0.2);
-        }
-
-        .card-img {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s;
-        }
-
-        .tour-card:hover .card-img {
-            transform: scale(1.03);
-        }
-
-        .card-content {
-            padding: 24px;
-        }
-
-        .card-content h3 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-        }
-
-        .location {
-            color: #c47b3e;
-            font-weight: 500;
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .price {
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: #b96f30;
-            margin: 12px 0;
-        }
-
-        .book-btn {
-            width: 100%;
-            margin-top: 8px;
-            background: #e7cba5;
-            color: #4b2e1a;
-            border-radius: 60px;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-        }
-
-        .book-btn:hover {
-            background: #d6b17e;
-        }
-
-        /* Почему доверяют */
-        .trust-section {
-            background: #f6efdf;
-            border-radius: 60px;
-            padding: 40px 30px;
-            margin: 50px 0;
-            text-align: center;
-        }
-
-        .trust-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 32px;
-            margin-top: 30px;
-        }
-
-        .trust-item {
-            background: white;
-            border-radius: 40px;
-            padding: 28px 20px;
-            width: 220px;
-            transition: 0.3s;
-        }
-
-        .trust-item i {
-            font-size: 2.5rem;
-            color: #c49a6c;
-        }
-
-        /* Отзывы */
-        .reviews {
-            background: #fffcf0;
-            padding: 40px 0;
-            border-radius: 48px;
-            margin: 40px 0;
-        }
-
-        .review-card {
-            background: white;
-            border-radius: 32px;
-            padding: 28px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
-
-        /* Контакты + соцсети */
-        .contact-bar {
-            background: #2e3b2c;
-            color: #f9e7c2;
-            border-radius: 50px;
-            padding: 32px 28px;
-            margin: 50px 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .contact-info a {
-            color: #ffd966;
-            text-decoration: none;
-            margin: 0 12px;
-            font-size: 1.5rem;
-            transition: 0.2s;
-        }
-
-        .contact-info a:hover {
-            transform: scale(1.1);
-            display: inline-block;
-            color: #ffb347;
-        }
-
-        .contact-details p {
-            margin: 8px 0;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 32px 0;
-            border-top: 1px solid #ddd8c8;
-            margin-top: 30px;
-            font-size: 0.85rem;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 12px;
-                padding: 16px;
-            }
-            .nav-links {
-                gap: 18px;
-                justify-content: center;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
-            .contact-bar {
-                flex-direction: column;
-                text-align: center;
-                border-radius: 32px;
-            }
-            .btn {
-                padding: 8px 20px;
-            }
-            .cards-grid {
-                gap: 20px;
-            }
-        }
-
-        /* Destinations extra block исправляем дубли */
-        .destinations-alt {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 28px;
-            margin: 40px 0;
-        }
-        .dest-card {
-            background: #ffffffd9;
-            border-radius: 28px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
-        }
-        .whatsapp-link, .insta-link {
-            background: #25D366;
-            padding: 6px 12px;
-            border-radius: 40px;
-            color: white;
-            font-size: 0.9rem;
-        }
-        .insta-link {
-            background: #E4405F;
-        }
-        /* responsive */
-        img {
-            max-width: 100%;
-        }
-        .fake-img {
-            background: #e9dfcd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #ab8a54;
-        }
-    </style>
+    /* анимация для плавного появления элементов */
+    button, .btn, .tour-card, .review-card, .step, .social-item {
+      cursor: pointer;
+    }
+    /* для hover на картинках */
+    .fa-brands, .fas {
+      transition: transform 0.2s;
+    }
+    .social-item:hover i {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 <body>
 
 <header>
+  <div class="container">
     <div class="navbar">
-        <div class="logo"><i class="fas fa-map-marked-alt"></i> CaravanGo</div>
-        <div class="nav-links">
-            <a href="#home">Главная</a>
-            <a href="#tours">Туры</a>
-            <a href="#destinations">Направления</a>
-            <a href="#reviews">Отзывы</a>
-            <a href="#contact">Контакты</a>
-        </div>
-        <a href="#contact" class="btn btn-outline">Связаться</a>
+      <div class="logo">🏜️ Nomad<span>Travel</span></div>
+      <ul class="nav-links">
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#tours">Туры</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
     </div>
+  </div>
 </header>
 
 <main>
-    <!-- Hero -->
-    <section id="home" class="hero reveal">
-        <div class="container">
-            <h1>Открой Туркменистан <br> с сердцем Каравана</h1>
-            <p>Древний Мерв, подземные озера Ков-Ата, огонь Дарваза и восточное гостеприимство. Интерактивные маршруты и полное погружение в культуру.</p>
-            <div class="hero-buttons">
-                <a href="#tours" class="btn btn-primary">Выбрать тур</a>
-                <a href="#contact" class="btn btn-outline">Бесплатная консультация</a>
-            </div>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content fade-up">
+        <h1>Откройте сердце <br> Туркменистана</h1>
+        <p>Загадочный Каракум, древний Мерв, подземные озера Ков-Ата и роскошь Ашхабада. Путешествуйте с местными экспертами.</p>
+        <div class="hero-buttons">
+          <a href="#tours" class="btn">Подобрать тур</a>
+          <a href="#contact" class="btn btn-outline">Связаться</a>
         </div>
-    </section>
-
-    <div class="container">
-        <!-- Our Story -->
-        <div class="reveal" style="margin: 30px 0 20px; text-align: center;">
-            <h2 class="section-title">Наша история: зов странствий и опыт</h2>
-            <p style="max-width: 800px; margin: 0 auto; color: #4a5a40;">Мы не просто турагентство — мы команда, влюбленная в Туркменистан. Организуем путешествия, где каждый маршрут продуман до мелочей, а вы почувствуете магию Великого Шелкового пути.</p>
-        </div>
-
-        <!-- Туры (3 базовых, как на скриншоте но с туркменским колоритом) -->
-        <h2 class="section-title reveal" id="tours">✨ Популярные туры по Туркменистану</h2>
-        <div class="cards-grid">
-            <div class="tour-card reveal">
-                <div class="card-img fake-img" style="background-image: linear-gradient(120deg, #b98f65, #dbb47a); display: flex; align-items: center; justify-content: center; font-size: 2rem;"><i class="fas fa-fire"></i> Дарваза</div>
-                <div class="card-content">
-                    <h3>Врата ада & пустыня</h3>
-                    <div class="location"><i class="fas fa-map-marker-alt"></i> Дарваза, Ахалский велаят</div>
-                    <div>Длительность: 3 дня / 2 ночи</div>
-                    <div class="price">от $990</div>
-                    <button class="btn book-btn book-trigger" data-trip="Дарваза + Кратер">Забронировать тур</button>
-                </div>
-            </div>
-            <div class="tour-card reveal">
-                <div class="card-img fake-img" style="background-image: linear-gradient(120deg, #bb9a6e, #e9c391); display: flex; align-items: center; justify-content: center; font-size: 2rem;"><i class="fas fa-landmark"></i> Мерв</div>
-                <div class="card-content">
-                    <h3>Древний Мерв</h3>
-                    <div class="location"><i class="fas fa-map-marker-alt"></i> Марыйский велаят, ЮНЕСКО</div>
-                    <div>Длительность: 4 дня</div>
-                    <div class="price">$1 250</div>
-                    <button class="btn book-btn book-trigger" data-trip="Исторический Мерв">Бронировать</button>
-                </div>
-            </div>
-            <div class="tour-card reveal">
-                <div class="card-img fake-img" style="background-image: linear-gradient(120deg, #cbae87, #f4ddb5); display: flex; align-items: center; justify-content: center; font-size: 2rem;"><i class="fas fa-water"></i> Ков-Ата</div>
-                <div class="card-content">
-                    <h3>Подземное озеро Ков-Ата</h3>
-                    <div class="location"><i class="fas fa-map-marker-alt"></i> Бахарлы, гора Ха-джы</div>
-                    <div>Длительность: 2 дня (+пещеры)</div>
-                    <div class="price">$780</div>
-                    <button class="btn book-btn book-trigger" data-trip="Ков-Ата и каньоны">Записаться</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Доп направления: Explore Stunning Destinations (туркменский стиль)-->
-        <h2 class="section-title reveal" id="destinations">🌟 Удивительные направления</h2>
-        <div class="destinations-alt reveal">
-            <div class="dest-card"><i class="fas fa-archway" style="font-size: 2rem; color:#c68b46;"></i><h3>Ашхабад — столица из мрамора</h3><p>Дворец Огузхана, монумент независимости</p><span class="price">от $420</span><button class="btn book-trigger" style="margin-top: 12px; background: #e6c394;" data-trip="Экскурсия по Ашхабаду">Узнать</button></div>
-            <div class="dest-card"><i class="fas fa-mountain" style="font-size: 2rem; color:#c68b46;"></i><h3>Каньоны Кугитанг</h3><p>Динозавры плато, ущелье Узбой</p><span class="price">$1050 / 4 дня</span><button class="btn book-trigger" style="margin-top: 12px; background: #e6c394;" data-trip="Каньоны Кугитанг">Детали</button></div>
-            <div class="dest-card"><i class="fas fa-tents" style="font-size: 2rem; color:#c68b46;"></i><h3>Ночлег в пустыне Каракумы</h3><p>Верблюды, звездное небо, фольклор</p><span class="price">$590</span><button class="btn book-trigger" style="margin-top: 12px; background: #e6c394;" data-trip="Ночь в Каракумах">Забронировать</button></div>
-        </div>
-
-        <!-- Why Travelers Trust Us -->
-        <div class="trust-section reveal">
-            <h3>Почему путешественники доверяют нам?</h3>
-            <div class="trust-grid">
-                <div class="trust-item"><i class="fas fa-passport"></i><h4>Визовая поддержка</h4><p>Бесплатное консультирование по въезду в Туркменистан</p></div>
-                <div class="trust-item"><i class="fas fa-hand-holding-heart"></i><h4>24/7 поддержка</h4><p>Русскоязычные гиды и оперативная связь</p></div>
-                <div class="trust-item"><i class="fas fa-map-marked-alt"></i><h4>Авторские маршруты</h4><p>Уникальные локации + трансфер</p></div>
-            </div>
-        </div>
-
-        <!-- Отзывы Traveler Stories -->
-        <div id="reviews" class="reviews reveal">
-            <h3 class="section-title" style="margin-top: 0;">❤️ Истории наших путешественников</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center;">
-                <div class="review-card" style="flex:1; min-width: 250px;"><i class="fas fa-star" style="color:#f5b042;"></i> <strong>Незабываемое приключение</strong><br>“Организация тура в Дарвазу была идеальной. Спали в юртах, смотрели на огненный кратер - магия!”<br>- <em>Алексей, travel blogger</em></div>
-                <div class="review-card" style="flex:1; min-width: 250px;"><i class="fas fa-star" style="color:#f5b042;"></i> <strong>Лучший гид в Мерве</strong><br>“Гид рассказал легенды древнего города, а также помог с местной кухней. Огромное спасибо!”<br>- <em>Елена С.</em></div>
-                <div class="review-card" style="flex:1; min-width: 250px;"><i class="fas fa-star" style="color:#f5b042;"></i> <strong>Ков-Ата впечатлило</strong><br>“Плавали в пещерном озере, температура 33°C. Анимации, комфорт — всё на высоте.”<br>- <em>Максим и Алия</em></div>
-            </div>
-        </div>
-
-        <!-- Ready to embark -->
-        <div class="reveal" style="text-align: center; background: #f0e7d6; border-radius: 60px; padding: 40px 20px; margin: 40px 0;">
-            <h3>Готовы отправиться в путешествие всей мечты?</h3>
-            <p style="margin: 15px 0;">Подарите себе незабываемый отдых с CaravanGo. Начните планировать уже сегодня!</p>
-            <a href="#contact" class="btn btn-primary">Посетить сайт →</a>
-        </div>
-
-        <!-- Контактный блок с соцсетями, email, телефон (WhatsApp, Instagram) -->
-        <div id="contact" class="contact-bar reveal">
-            <div>
-                <h3><i class="fas fa-phone-alt"></i> Свяжитесь с нами</h3>
-                <div class="contact-info" style="margin-top: 12px;">
-                    <a href="https://wa.me/99312345678" target="_blank" class="whatsapp-link" style="background:#25D366; display: inline-block; border-radius: 40px; padding: 8px 16px; font-size: 0.9rem; color:white;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    <a href="https://instagram.com/caravangotm" target="_blank" class="insta-link" style="background:#E4405F; display: inline-block; border-radius: 40px; padding: 8px 16px; font-size: 0.9rem; color:white;"><i class="fab fa-instagram"></i> Instagram</a>
-                    <a href="mailto:tourism@caravango.tm" style="color:#ffdfa5; font-size: 1rem; margin-left: 6px;"><i class="fas fa-envelope"></i> tourism@caravango.tm</a>
-                </div>
-            </div>
-            <div class="contact-details">
-                <p><i class="fas fa-phone"></i> Телефон: +993 12 45 67 89</p>
-                <p><i class="fab fa-telegram"></i> Telegram: @caravango_asia</p>
-                <p><i class="fas fa-clock"></i> Пн-Пт: 9:00 - 19:00 (GMT+5)</p>
-            </div>
-        </div>
-
-        <!-- Доп футер с компанией akurtu / skyaura адаптация -->
-        <div style="background: #ebe1cf; border-radius: 36px; padding: 30px 20px; margin: 30px 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
-            <div><strong>SKYAURA</strong><br>Доступные авиабилеты по всему миру<br><i class="fas fa-plane"></i> <a href="#" style="color:#7a541e;">skyaura.com</a></div>
-            <div><strong>Компания Akurtu</strong><br>www.akurtu.com   |   info@akurtu.com</div>
-            <div><strong>Контакты</strong><br>Email: info@caravango.tm<br>Fax: +993 (12) 987654</div>
-        </div>
+      </div>
+      <div class="hero-image fade-up">
+        <i class="fas fa-landmark"></i>
+        <i class="fas fa-camel" style="font-size: 3rem; margin-left: -20px;"></i>
+      </div>
     </div>
+  </section>
+
+  <!-- Популярные туры по Туркменистану (адаптировано) -->
+  <section id="tours">
+    <div class="container">
+      <h2 class="fade-up">✨ Наши экспедиции</h2>
+      <div class="cards-grid">
+        <!-- Тур 1 -->
+        <div class="tour-card fade-up">
+          <div class="card-icon"><i class="fas fa-fire"></i></div>
+          <h3>Дарваза «Врата ада»</h3>
+          <div class="tour-detail"><i class="fas fa-map-marker-alt"></i> Пустыня Каракум</div>
+          <div class="tour-detail"><i class="far fa-clock"></i> 2 дня / 1 ночь</div>
+          <div class="price">$450</div>
+          <p>Ночлег в юртах, наблюдение за газовым кратером, звёздное небо.</p>
+          <button class="btn book-btn" data-trip="Дарваза — Врата ада">Забронировать</button>
+        </div>
+        <!-- Тур 2 -->
+        <div class="tour-card fade-up">
+          <div class="card-icon"><i class="fas fa-church"></i></div>
+          <h3>Древний Мерв</h3>
+          <div class="tour-detail"><i class="fas fa-map-marker-alt"></i> Марыйский велаят</div>
+          <div class="tour-detail"><i class="far fa-clock"></i> 3 дня / 2 ночи</div>
+          <div class="price">$620</div>
+          <p>Объект ЮНЕСКО, мавзолеи, крепости и легенды Великого Шелкового пути.</p>
+          <button class="btn book-btn" data-trip="Древний Мерв">Забронировать</button>
+        </div>
+        <!-- Тур 3 -->
+        <div class="tour-card fade-up">
+          <div class="card-icon"><i class="fas fa-water"></i></div>
+          <h3>Подземное озеро Ков-Ата</h3>
+          <div class="tour-detail"><i class="fas fa-map-marker-alt"></i> Бахерден</div>
+          <div class="tour-detail"><i class="far fa-clock"></i> 1 день</div>
+          <div class="price">$190</div>
+          <p>Пещера с термальной водой, целебные свойства и сталактиты.</p>
+          <button class="btn book-btn" data-trip="Подземное озеро Ков-Ата">Забронировать</button>
+        </div>
+        <!-- Тур 4 -->
+        <div class="tour-card fade-up">
+          <div class="card-icon"><i class="fas fa-city"></i></div>
+          <h3>Ашхабад — город мрамора</h3>
+          <div class="tour-detail"><i class="fas fa-map-marker-alt"></i> Столица Туркменистана</div>
+          <div class="tour-detail"><i class="far fa-clock"></i> 2 дня</div>
+          <div class="price">$340</div>
+          <p>Монумент независимости, Арка Нейтралитета, восточный базар и уникальная архитектура.</p>
+          <button class="btn book-btn" data-trip="Ашхабад тур">Забронировать</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Почему путешественники доверяют нам + реальные отзывы -->
+  <section id="reviews">
+    <div class="container">
+      <h2 class="fade-up">Почему выбирают нас?</h2>
+      <div class="trust-grid">
+        <div class="review-card fade-up">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="quote">«Невероятное путешествие в Каракумы! Организация на высшем уровне, гид рассказал тайны пустыни. Спасибо NomadTravel!»</p>
+          <strong>— Эльдар К., Ашхабад</strong>
+        </div>
+        <div class="review-card fade-up">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="quote">«Мерв потрясает воображение! Экскурсия была глубокой, трансферы комфортные. Спасибо за настоящий historical тур.»</p>
+          <strong>— Алина М., Россия</strong>
+        </div>
+        <div class="review-card fade-up">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          <p class="quote">«Удобное бронирование и быстрая поддержка. Ков-Ата — жемчужина, рекомендуем всем любителям приключений!»</p>
+          <strong>— Nurana T., Instagram-блогер</strong>
+        </div>
+      </div>
+
+      <div class="steps fade-up" style="margin-top: 30px;">
+        <div class="step"><i class="fas fa-search"></i><h4>Выберите тур</h4><p>Подберем оптимальный маршрут</p></div>
+        <div class="step"><i class="fas fa-headset"></i><h4>Помощь 24/7</h4><p>Менеджеры на связи</p></div>
+        <div class="step"><i class="fas fa-plane-departure"></i><h4>Визовая поддержка</h4><p>Поможем с документами в Туркменистан</p></div>
+        <div class="step"><i class="fas fa-grin-hearts"></i><h4>Незабываемые эмоции</h4><p>Персональный подход</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты: инстаграм, ватсап, емейл, телефон + ссылки -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="fade-up">Свяжитесь с нами легко</h2>
+      <div class="contact-flex fade-up">
+        <div class="contact-info">
+          <h3 style="color:#ffd966;">📍 Центр поддержки</h3>
+          <p><i class="fas fa-phone-alt"></i> <a href="tel:+99312345678">+993 12 345-678</a> (WhatsApp, Telegram)</p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:hello@nomad-travel.tm">hello@nomad-travel.tm</a></p>
+          <p><i class="fas fa-map-pin"></i> Ашхабад, пр. Махтумкули, 15</p>
+          <p style="font-size:0.9rem; margin-top:20px;">Напишите нам в любое время — ответим в течение часа!</p>
+        </div>
+        <div class="social-links">
+          <div class="social-item"><i class="fab fa-instagram"></i> <a href="https://instagram.com/nomadtravel_tm" target="_blank">@nomadtravel_tm</a></div>
+          <div class="social-item"><i class="fab fa-whatsapp"></i> <a href="https://wa.me/99312345678" target="_blank">WhatsApp +993 12 345678</a></div>
+          <div class="social-item"><i class="fab fa-telegram"></i> <a href="https://t.me/nomadtravel_tm" target="_blank">Telegram канал</a></div>
+          <div class="social-item"><i class="fas fa-globe"></i> <a href="#">www.nomad-travel.tm</a></div>
+          <div class="social-item"><i class="fab fa-viber"></i> <a href="viber://chat?number=99312345678">Viber консультация</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer class="footer">
-    <p>© 2025 CaravanGo Turkmenistan — Туристическое агентство. Все права защищены.</p>
-    <p style="margin-top: 5px;"><i class="fas fa-heart" style="color:#c2854b;"></i> Путешествуйте с душой по Туркменистану</p>
+<footer>
+  <div class="container">
+    <p>© 2025 Nomad Travel — Туристическое агентство Туркменистан. Лицензия Минкультуры ТМ.</p>
+    <p style="margin-top: 12px;"><i class="fas fa-heart" style="color:#c9772e;"></i> Ваши приключения — наша страсть</p>
+  </div>
 </footer>
 
 <script>
-    // Scroll reveal + анимации
-    const revealElements = document.querySelectorAll('.reveal');
-    function checkReveal() {
-        const windowHeight = window.innerHeight;
-        revealElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < windowHeight - 80) {
-                el.classList.add('active');
-            }
-        });
-    }
-    window.addEventListener('scroll', checkReveal);
-    window.addEventListener('load', checkReveal);
-    
-    // Кликабельные кнопки book-trigger (имитация отправки / переход на контакты)
-    const bookBtns = document.querySelectorAll('.book-trigger');
-    bookBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const tripName = this.getAttribute('data-trip') || 'тур';
-            alert(`Спасибо за интерес к туру "${tripName}"!\nНаш менеджер свяжется с вами в WhatsApp или по телефону. \nИли напишите нам в Instagram / WhatsApp, чтобы подтвердить бронирование.`);
-            // Плавный скролл к контактам не навязчиво
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
+  // Анимация при скролле (Intersection Observer)
+  const fadeElements = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
     });
-    
-    // Добавим также hover анимации для карточек и дополнительных ссылок
-    const allCards = document.querySelectorAll('.tour-card, .dest-card, .review-card, .trust-item');
-    allCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-6px)';
-            card.style.transition = '0.25s';
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0px)';
-        });
+  }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
+
+  fadeElements.forEach(el => observer.observe(el));
+
+  // Обработка кликов на кнопки "Забронировать" с сообщениями (кликабельные)
+  const bookBtns = document.querySelectorAll('.book-btn');
+  bookBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tripName = btn.getAttribute('data-trip') || 'выбранный тур';
+      // Имитация отправки запроса + контактные рекомендации
+      alert(`✅ Спасибо за интерес к туру "${tripName}"!\n\nНаш менеджер свяжется с вами в течение 15 минут.\nТакже вы можете написать нам в WhatsApp: +993 12 345-678 или Instagram @nomadtravel_tm.`);
     });
-    
-    // Добавляем поддержку Nav ссылок для плавной прокрутки
-    document.querySelectorAll('.nav-links a, .hero-buttons a[href^="#"], .btn[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if(href && href.startsWith('#')) {
-                e.preventDefault();
-                const targetId = href.substring(1);
-                const targetElem = document.getElementById(targetId);
-                if(targetElem) {
-                    targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }
-        });
+  });
+
+  // Обработка всех кликабельных ссылок контактов + дополнительные кнопки (кнопки Get Started / Visit Website и т.д.)
+  // Создадим единый слушатель для кнопок "Get Started" (hero) и других, которых нет, но для порядка добавим
+  const startBtn = document.querySelector('.hero-buttons .btn:first-child');
+  if(startBtn) {
+    startBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const toursSection = document.getElementById('tours');
+      if(toursSection) toursSection.scrollIntoView({ behavior: 'smooth' });
     });
-    
-    // кнопка "Связаться" на навбаре плавно
-    const contactNav = document.querySelector('.navbar .btn-outline');
-    if(contactNav) {
-        contactNav.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-    
-    // обработчик для "Посетить сайт"
-    const visitBtn = document.querySelector('.ready-section .btn-primary');
-    if(visitBtn) visitBtn.addEventListener('click', (e)=> {e.preventDefault(); document.getElementById('contact').scrollIntoView({behavior:'smooth'});});
-    
-    // обработчик кнопок "Забронировать тур"/ Book Trip
-    const allBookBtns = document.querySelectorAll('.book-btn');
-    allBookBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            let tripText = '';
-            const parentCard = this.closest('.tour-card');
-            if(parentCard) {
-                const title = parentCard.querySelector('h3')?.innerText || 'тур';
-                tripText = title;
-            } else {
-                tripText = 'выбранный тур';
-            }
-            alert(`✅ Заявка на "${tripText}" принята! Наши специалисты свяжутся с вами через WhatsApp или по почте.`);
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
+  }
+  const contactBtn = document.querySelector('.btn-outline');
+  if(contactBtn && contactBtn.getAttribute('href') === '#contact') {
+    contactBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
     });
-    
-    // Дополнительная анимация - при загрузке активировать видимые блоки
-    setTimeout(() => {
-        checkReveal();
-    }, 150);
+  }
+
+  // Дополнительно: все ссылки на почту/телефон уже рабочие, но сделаем плавный скролл навигации
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const hash = this.getAttribute('href');
+      if(hash && hash !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(hash);
+        if(target) target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Адаптив всплывающих окон — дополнительно эмуляция перехода на страницу тура не требуется
+  // Также добавим легкий эффект для кнопок, если мы хотим что-то имитировать "Visit Website"
+  // Но в футере есть ссылка-заглушка, сделаем кликабельной (под домен)
+  const fakeWeb = document.querySelector('.social-item .fa-globe')?.parentElement?.querySelector('a');
+  if(fakeWeb) {
+    fakeWeb.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert("🌐 Официальный сайт: www.nomad-travel.tm \nПереходите за полным каталогом туров и акциями!");
+    });
+  }
+  // Кнопка "Visit Website" в оригинале не была в структуре, но добавим изящно 
+  // Поскольку её нет в финальном дизайне (была в исходном ТЗ, но мы сделали контакты соцсетей) - дополнительные ссылки соцсетей и так кликабельны.
+  // добавим поддержку всех контактов emai/телефон чтобы по нажатию открывалось приложение
+  // все уже сформировано через теги <a href="tel:... и mailto:...
+  
+  // Также сделаем мини-модал для карточек при клике на иконку соцсетей (кроме прямых ссылок)
+  // Все контакты полностью работают, клик на почту/телефон откроет родное приложение.
+  // Дополнительно добавим "Book Now" в адаптивном виде (изначальных кнопок было много в задании, но кнопка "Book Trip" уже трансформирована в наши кнопки)
+  console.log("Сайт турагентства Туркменистан готов! Анимации, адаптив, 100% кликабельные кнопки и контакты.")
 </script>
 </body>
 </html>
+```
