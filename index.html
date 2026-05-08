@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Tripzy | Современное туристическое агентство</title>
-  <!-- Google Fonts: чистая геометрия + элегантность -->
+  <title>Tripzy | Яркие путешествия — туристическое агентство</title>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (свободные иконки) -->
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -17,7 +17,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #ffffff;
+      background-color: #fefcf8;
       color: #1e2a2f;
       scroll-behavior: smooth;
       overflow-x: hidden;
@@ -42,7 +42,38 @@
 
     section {
       padding: 80px 0;
-      border-bottom: 1px solid #f0ede8;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* фоновые изображения для секций (яркие, свежие) */
+    .bg-hero {
+      background: linear-gradient(105deg, rgba(255,245,225,0.92), rgba(255,250,240,0.88)), url('https://images.pexels.com/photos/4328962/beautiful-shot-of-a-sunset-over-the-ocean-with-waves-crashing-against-the-sand.jpg?auto=compress&cs=tinysrgb&w=1600');
+      background-size: cover;
+      background-position: center 30%;
+      background-attachment: fixed;
+    }
+    .bg-tours {
+      background: linear-gradient(120deg, rgba(255,248,235,0.9), rgba(255,245,230,0.92)), url('https://images.pexels.com/photos/2387873/beautiful-aerial-shot-of-the-santorini-caldera-with-white-buildings-overlooking-the-sea.jpg?auto=compress&cs=tinysrgb&w=1600');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+    .bg-stories {
+      background: linear-gradient(115deg, rgba(250,245,235,0.9), rgba(255,250,235,0.88)), url('https://images.pexels.com/photos/2449626/group-of-friends-walking-on-the-street-during-sunset.jpg?auto=compress&cs=tinysrgb&w=1600');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .bg-destinations {
+      background: linear-gradient(110deg, #fffaf3 0%, #fff5ea 100%), url('https://images.pexels.com/photos/466685/beautiful-landscape-cliff-coastline-466685.jpeg?auto=compress&cs=tinysrgb&w=1600');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .bg-cta {
+      background: linear-gradient(135deg, #ffefe0, #fff2e6), url('https://images.pexels.com/photos/699466/beach-ocean-sunset-travel-699466.jpeg?auto=compress&cs=tinysrgb&w=1600');
+      background-size: cover;
+      background-position: center;
     }
 
     h1, h2, h3 {
@@ -67,14 +98,14 @@
       border-radius: 4px;
     }
 
-    /* хедер - нативный современный */
+    /* хедер - прозрачный современный */
     header {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 245, 0.92);
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid #f0eae2;
+      border-bottom: 1px solid rgba(255, 123, 44, 0.2);
     }
     .navbar {
       display: flex;
@@ -121,7 +152,7 @@
       cursor: pointer;
       transition: all 0.25s ease;
       text-decoration: none;
-      box-shadow: 0 4px 10px rgba(255, 123, 44, 0.2);
+      box-shadow: 0 4px 10px rgba(255, 123, 44, 0.25);
     }
     .btn-outline-light {
       background: transparent;
@@ -134,6 +165,7 @@
       cursor: pointer;
       display: inline-block;
       text-decoration: none;
+      backdrop-filter: blur(4px);
     }
     .btn-outline-light:hover {
       background: #ff7b2c;
@@ -143,47 +175,20 @@
     .btn-primary:hover {
       background: #e0641d;
       transform: translateY(-3px);
-      box-shadow: 0 12px 20px rgba(255, 123, 44, 0.3);
+      box-shadow: 0 12px 20px rgba(255, 123, 44, 0.4);
     }
 
-    /* HERO - современный минимализм */
-    .hero {
-      background: linear-gradient(120deg, #fffaf3 0%, #ffffff 100%);
-      padding: 70px 0 90px;
+    /* карточки с лёгкой полупрозрачностью, но читаемо */
+    .tour-card, .spot-card, .review-item, .step-block {
+      background: rgba(255, 255, 245, 0.92);
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
     }
-    .hero-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 50px;
-      align-items: center;
-      justify-content: space-between;
+    .tour-card:hover, .spot-card:hover, .review-item:hover {
+      background: rgba(255, 255, 250, 0.98);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 35px -8px rgba(0,0,0,0.1);
     }
-    .hero-content {
-      flex: 1.2;
-    }
-    .hero-content h1 {
-      font-size: 3.5rem;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      color: #1e2f2c;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 18px;
-      margin-top: 32px;
-      flex-wrap: wrap;
-    }
-    .hero-img {
-      flex: 1;
-      text-align: center;
-    }
-    .hero-img i {
-      font-size: 11rem;
-      color: #ffb76e;
-      filter: drop-shadow(0 15px 20px rgba(0,0,0,0.05));
-    }
-
-    /* карточки туров (три колонки) */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -191,26 +196,9 @@
       margin-top: 30px;
     }
     .tour-card {
-      background: #ffffff;
       border-radius: 32px;
       padding: 28px 24px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
-      transition: all 0.35s ease;
-      border: 1px solid #ffefe2;
-    }
-    .tour-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 30px 40px rgba(0, 0, 0, 0.08);
-      border-color: #ffcfaa;
-    }
-    .card-icon {
-      font-size: 2.5rem;
-      color: #ff7b2c;
-      margin-bottom: 20px;
-    }
-    .tour-card h3 {
-      font-size: 1.7rem;
-      margin-bottom: 12px;
+      border: 1px solid rgba(255, 200, 150, 0.6);
     }
     .detail-row {
       display: flex;
@@ -226,8 +214,6 @@
       color: #ff7b2c;
       margin: 15px 0 20px;
     }
-
-    /* секция popular spots + explore */
     .popular-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -235,43 +221,10 @@
       margin: 40px 0;
     }
     .spot-card {
-      background: #fefaf5;
       border-radius: 28px;
-      padding: 20px;
-      transition: 0.25s;
-      border: 1px solid #f3ede5;
+      padding: 24px;
+      text-align: center;
     }
-    .spot-card:hover {
-      background: white;
-      transform: scale(1.02);
-      box-shadow: 0 18px 30px rgba(0,0,0,0.05);
-    }
-
-    /* отзывы и истории */
-    .reviews-flex {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-top: 30px;
-    }
-    .review-item {
-      background: #fffcf8;
-      padding: 28px;
-      border-radius: 32px;
-      flex: 1;
-      transition: 0.2s;
-      border: 1px solid #f7ede2;
-    }
-    .review-item:hover {
-      background: #ffffff;
-      border-color: #ffddbc;
-    }
-    .stars {
-      color: #f8b551;
-      margin-bottom: 12px;
-    }
-
-    /* шаги + доверие */
     .steps-trust {
       display: flex;
       flex-wrap: wrap;
@@ -282,14 +235,26 @@
     .step-block {
       flex: 1;
       text-align: center;
-      background: #ffffff;
       padding: 32px 18px;
       border-radius: 32px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-      border: 1px solid #f0e8df;
+    }
+    .reviews-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .review-item {
+      padding: 28px;
+      border-radius: 32px;
+      flex: 1;
+    }
+    .stars {
+      color: #f8b551;
+      margin-bottom: 12px;
     }
 
-    /* контактный блок (телефон, соцсети, почта) */
+    /* контактный блок яркий, с картинкой на фоне? оставим современный тёмный + акцент */
     .contact-modern {
       background: #1e2f2c;
       border-radius: 48px;
@@ -299,24 +264,16 @@
       flex-wrap: wrap;
       gap: 50px;
       justify-content: space-between;
-    }
-    .contact-left {
-      flex: 2;
-    }
-    .contact-left p {
-      margin: 18px 0;
-      display: flex;
-      align-items: center;
-      gap: 15px;
+      background-image: url('https://images.pexels.com/photos/2387873/beautiful-aerial-shot-of-the-santorini-caldera-with-white-buildings-overlooking-the-sea.jpg?auto=compress&cs=tinysrgb&w=600');
+      background-size: cover;
+      background-position: right;
+      background-blend-mode: overlay;
+      background-color: #1a2c29;
     }
     .contact-left a {
       color: #ffcf9a;
       text-decoration: none;
       font-weight: 500;
-    }
-    .contact-left a:hover {
-      color: white;
-      text-decoration: underline;
     }
     .social-links-modern {
       flex: 1;
@@ -325,27 +282,18 @@
       gap: 15px;
     }
     .social-btn {
-      background: rgba(255,255,245,0.08);
+      background: rgba(255,255,245,0.1);
       border-radius: 60px;
       padding: 14px 20px;
       display: flex;
       align-items: center;
       gap: 15px;
       transition: 0.2s;
+      backdrop-filter: blur(2px);
     }
-    .social-btn i {
-      font-size: 1.6rem;
-      width: 30px;
-    }
-    .social-btn a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .social-btn:hover {
-      background: #ff7b2c;
-      transform: translateX(8px);
-    }
+    .social-btn i { font-size: 1.6rem; width: 30px; }
+    .social-btn a { color: white; text-decoration: none; font-weight: 500; }
+    .social-btn:hover { background: #ff7b2c; transform: translateX(8px); }
 
     footer {
       background: #f9f7f2;
@@ -353,41 +301,25 @@
       text-align: center;
       color: #4b5e57;
     }
-
     @media (max-width: 800px) {
-      .container {
-        padding: 0 20px;
-      }
-      .navbar {
-        flex-direction: column;
-        gap: 15px;
-      }
-      .hero-content h1 {
-        font-size: 2.4rem;
-      }
-      h2:after {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      h2 {
-        text-align: center;
-        display: block;
-      }
-      .hero-grid {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-buttons {
-        justify-content: center;
-      }
-      .contact-modern {
-        flex-direction: column;
-        padding: 35px 28px;
-      }
+      .container { padding: 0 20px; }
+      .navbar { flex-direction: column; gap: 15px; }
+      .hero-content h1 { font-size: 2.4rem; }
+      h2:after { left: 50%; transform: translateX(-50%); }
+      h2 { text-align: center; display: block; }
+      .contact-modern { flex-direction: column; padding: 35px 28px; }
     }
-
-    button, .btn-primary, .btn-outline-light, .social-btn {
-      cursor: pointer;
+    /* Дополнительные плашки с изображениями для каждой карточки */
+    .card-icon i {
+      font-size: 2.5rem;
+      background: rgba(255,123,44,0.15);
+      padding: 12px;
+      border-radius: 60px;
+    }
+    .hero-img {
+      background: rgba(255,245,225,0.5);
+      border-radius: 70px;
+      padding: 20px;
     }
   </style>
 </head>
@@ -409,29 +341,29 @@
 </header>
 
 <main>
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content fade-up">
-        <h1>Adventure Starts <br>With Your Journey</h1>
-        <p style="font-size:1.2rem; color:#4b675e;">Interactive lessons, engaging games, and personalized travel experiences crafted just for you.</p>
-        <div class="hero-buttons">
+  <!-- Hero с ярким фоновым изображением (пляж/океан) -->
+  <section id="home" class="bg-hero" style="padding: 70px 0 90px;">
+    <div class="container hero-grid" style="display: flex; flex-wrap: wrap; gap: 50px; align-items: center;">
+      <div class="hero-content fade-up" style="flex:1.2">
+        <h1 style="font-size: 3.5rem;">Adventure Starts <br>With Your Journey</h1>
+        <p style="font-size:1.2rem; color:#3b5c50;">Interactive lessons, engaging games, and personalized travel experiences crafted just for you.</p>
+        <div class="hero-buttons" style="display: flex; gap: 18px; margin-top: 32px;">
           <a href="#tours" class="btn-primary">Get Started</a>
           <a href="#explore" class="btn-outline-light">View Package</a>
         </div>
       </div>
-      <div class="hero-img fade-up">
-        <i class="fas fa-globe-americas"></i>
-        <i class="fas fa-hiking" style="font-size: 3rem; margin-left: -50px;"></i>
+      <div class="hero-img fade-up" style="flex:1; text-align:center;">
+        <i class="fas fa-globe-americas" style="font-size: 7rem; color:#ff8c42; filter:drop-shadow(0 8px 12px rgba(0,0,0,0.1));"></i>
+        <i class="fas fa-umbrella-beach" style="font-size: 3rem; margin-left: 15px; color:#ffb347;"></i>
       </div>
     </div>
   </section>
 
-  <!-- Our Story / Популярные туры в стиле фото (Santorini, Amalfi, Dubrovnik) -->
-  <section id="tours">
+  <!-- Туры с фоновой картинкой (Санторини) -->
+  <section id="tours" class="bg-tours">
     <div class="container">
-      <h2 class="fade-up">🌍 Our Story: Driven By Wanderlust</h2>
-      <p style="font-size:1.1rem; margin-bottom: 30px; max-width: 780px;">We are committed to providing exceptional service and making every journey seamless. We are not just a travel agency — we are your partners in discovery.</p>
+      <h2 class="fade-up" style="background: rgba(255,245,225,0.5); backdrop-filter: blur(4px); padding: 0 12px; border-radius: 60px;">🌍 Our Story: Driven By Wanderlust</h2>
+      <p style="font-size:1.1rem; margin-bottom: 30px; background: rgba(255,250,235,0.7); display: inline-block; padding: 6px 18px; border-radius: 40px;">We are committed to exceptional service, making every journey seamless.</p>
       <div class="cards-grid">
         <div class="tour-card fade-up">
           <div class="card-icon"><i class="fas fa-sun"></i></div>
@@ -461,8 +393,8 @@
     </div>
   </section>
 
-  <!-- Popular Tourist Spots (детализированные блоки) -->
-  <section id="explore">
+  <!-- Popular Spots с фоновой картинкой (свежая природа) -->
+  <section id="explore" class="bg-destinations">
     <div class="container">
       <h2 class="fade-up">✨ Popular Tourist Spots</h2>
       <div class="popular-grid">
@@ -473,42 +405,42 @@
     </div>
   </section>
 
-  <!-- Why Travelers Trust Us + интерактивные отзывы -->
-  <section id="stories">
+  <!-- Why Travelers Trust Us + отзывы с ярким задником -->
+  <section id="stories" class="bg-stories">
     <div class="container">
       <h2 class="fade-up">💙 Why Travelers Trust Us</h2>
       <div class="steps-trust">
-        <div class="step-block fade-up"><i class="fas fa-shield-alt" style="font-size:2rem; color:#ff7b2c;"></i><h4>Exceptional Service</h4><p>We are passionate about what we do, helping you make unforgettable trips.</p></div>
+        <div class="step-block fade-up"><i class="fas fa-shield-alt" style="font-size:2rem; color:#ff7b2c;"></i><h4>Exceptional Service</h4><p>Passionate about travel, helping you make unforgettable trips.</p></div>
         <div class="step-block fade-up"><i class="fas fa-comments" style="font-size:2rem; color:#ff7b2c;"></i><h4>24/7 Support</h4><p>We answer any question and help plan your perfect journey.</p></div>
-        <div class="step-block fade-up"><i class="fas fa-smile" style="font-size:2rem; color:#ff7b2c;"></i><h4>Satisfaction First</h4><p>We are confident you will love your experience with Tripzy.</p></div>
+        <div class="step-block fade-up"><i class="fas fa-smile" style="font-size:2rem; color:#ff7b2c;"></i><h4>Satisfaction First</h4><p>Confident you will love your experience with Tripzy.</p></div>
       </div>
 
       <h2 class="fade-up" style="margin-top: 60px;">📸 Traveler Stories & Reviews</h2>
       <div class="reviews-flex">
-        <div class="review-item fade-up"><div class="stars">★★★★★</div><p class="quote">"A truly amazing journey — our team created an unforgettable experience. Professional, knowledgeable, and safe throughout."</p><strong>— Alex Morgan, Travel Blogger</strong></div>
-        <div class="review-item fade-up"><div class="stars">★★★★★</div><p class="quote">"Great experience! The tour guide made sure we got the most out of our trip. Highly recommend Tripzy."</p><strong>— Lisa Chen, @lisachen</strong></div>
-        <div class="review-item fade-up"><div class="stars">★★★★☆</div><p class="quote">"Your dream trip in 4 simple steps. Detailed itinerary, everything you need for success!"</p><strong>— Lucy Smith, Travel Enthusiast</strong></div>
+        <div class="review-item fade-up"><div class="stars">★★★★★</div><p class="quote">"A truly amazing journey — professional, knowledgeable, and safe throughout."</p><strong>— Alex Morgan, Travel Blogger</strong></div>
+        <div class="review-item fade-up"><div class="stars">★★★★★</div><p class="quote">"Great experience! The tour guide made sure we got the most out of our trip."</p><strong>— Lisa Chen, @lisachen</strong></div>
+        <div class="review-item fade-up"><div class="stars">★★★★☆</div><p class="quote">"Your dream trip in 4 simple steps. Detailed itinerary, everything you need!"</p><strong>— Lucy Smith, Travel Enthusiast</strong></div>
       </div>
     </div>
   </section>
 
-  <!-- Explore Stunning Destinations (изображения с ценами/длительностью) -->
-  <section>
+  <!-- Explore Stunning Destinations -->
+  <section class="bg-destinations">
     <div class="container">
       <h2 class="fade-up">🗺️ Explore Stunning Destinations</h2>
       <div class="cards-grid">
         <div class="tour-card fade-up"><i class="fas fa-landmark"></i><h3>Eiffel Tower & Louvre</h3><div class="detail-row">Paris, France</div><div class="price">$3,500</div><div>Duration: 2 Days</div><button class="btn-primary book-btn" data-trip="Eiffel Tower & Louvre">Book Now</button></div>
-        <div class="tour-card fade-up"><i class="fas fa-praying-hands"></i><h3>Ancient Temples & Monastery</h3><div class="detail-row">Jerusalem</div><div class="price">$4,000</div><div>Duration: 2 Days</div><button class="btn-primary book-btn" data-trip="Ancient Temples & Gethsemane">Book Now</button></div>
+        <div class="tour-card fade-up"><i class="fas fa-praying-hands"></i><h3>Ancient Temples & Monastery</h3><div class="detail-row">Jerusalem</div><div class="price">$4,000</div><div>Duration: 2 Days</div><button class="btn-primary book-btn" data-trip="Ancient Temples">Book Now</button></div>
         <div class="tour-card fade-up"><i class="fas fa-fish"></i><h3>Great Barrier Reef</h3><div class="detail-row">Australia</div><div class="price">$5,000</div><div>Duration: 2 Days</div><button class="btn-primary book-btn" data-trip="Great Barrier Reef">Book Now</button></div>
-        <div class="tour-card fade-up"><i class="fas fa-building"></i><h3>Burj Khalifa & The Palm</h3><div class="detail-row">Dubai, UAE</div><div class="price">$7,000</div><div>Duration: 2 Days</div><button class="btn-primary book-btn" data-trip="Burj Khalifa & The Palm">Book Now</button></div>
+        <div class="tour-card fade-up"><i class="fas fa-building"></i><h3>Burj Khalifa & The Palm</h3><div class="detail-row">Dubai, UAE</div><div class="price">$7,000</div><div>Duration: 2 Days</div><button class="btn-primary book-btn" data-trip="Burj Khalifa">Book Now</button></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA: Ready To Embark -->
-  <section>
+  <!-- CTA с ярким фоном -->
+  <section class="bg-cta">
     <div class="container" style="text-align: center;">
-      <div class="fade-up" style="background:#fff7ef; border-radius: 56px; padding: 55px 30px;">
+      <div class="fade-up" style="background: rgba(255,250,235,0.85); backdrop-filter: blur(2px); border-radius: 56px; padding: 55px 30px;">
         <h2 style="display:block; text-align:center;">Ready To Embark On The Journey Of A Lifetime?</h2>
         <p style="margin: 20px 0;">Give yourself the gift of exploring the world. Start today.</p>
         <a href="#contact" class="btn-primary" style="background:#ff7b2c;">Visit Website →</a>
@@ -516,7 +448,7 @@
     </div>
   </section>
 
-  <!-- Контакты полные: Instagram, WhatsApp, Email, Phone, Соцсети и т.д. -->
+  <!-- Контакты с Instagram, WhatsApp, Email, Phone и соцсетями, фон с оверлеем -->
   <section id="contact">
     <div class="container">
       <h2 class="fade-up">📞 Get In Touch — Easy Contacts</h2>
@@ -561,17 +493,17 @@
   }, { threshold: 0.15, rootMargin: "0px 0px -10px 0px" });
   fadeEls.forEach(el => observer.observe(el));
 
-  // бронирование: все кнопки Book Trip / Book Now
+  // бронирование
   const bookBtns = document.querySelectorAll('.book-btn');
   bookBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const trip = btn.getAttribute('data-trip') || "выбранный тур";
-      alert(`✅ ${trip} — запрос отправлен!\nНаш менеджер свяжется с вами в ближайшее время.\nТакже пишите в WhatsApp: +44 20 3456 7890 или Instagram @tripzy.`);
+      alert(`✅ ${trip} — запрос отправлен!\nНаш менеджер свяжется с вами.\nТакже пишите в WhatsApp: +44 20 3456 7890 или Instagram @tripzy.`);
     });
   });
 
-  // навигация и кнопка Book Now в header
+  // навигация
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -581,30 +513,14 @@
         else if (href === '#tours') document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth' });
         else if (href === '#stories') document.getElementById('stories')?.scrollIntoView({ behavior: 'smooth' });
         else if (href === '#home') window.scrollTo({ top: 0, behavior: 'smooth' });
-        else {
-          const target = document.querySelector(href);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        }
+        else { const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth' }); }
       }
     });
   });
-  const bookNowNav = document.getElementById('bookNowNav');
-  if (bookNowNav) {
-    bookNowNav.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
-
-  // обработка кнопок Get Started / View Package
-  const getStarted = document.querySelector('.hero-buttons .btn-primary');
-  const viewPackage = document.querySelector('.hero-buttons .btn-outline-light');
-  if (getStarted) getStarted.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth' }); });
-  if (viewPackage) viewPackage.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('explore')?.scrollIntoView({ behavior: 'smooth' }); });
-
-  // кнопка Visit Website (в CTA)
-  const visitBtn = document.querySelector('.btn-primary[href="#contact"]');
-  if (visitBtn) visitBtn.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); });
+  document.getElementById('bookNowNav')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth' }); });
+  document.querySelector('.hero-buttons .btn-primary')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth' }); });
+  document.querySelector('.hero-buttons .btn-outline-light')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('explore')?.scrollIntoView({ behavior: 'smooth' }); });
+  document.querySelector('.btn-primary[href="#contact"]')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); });
 </script>
 </body>
 </html>
