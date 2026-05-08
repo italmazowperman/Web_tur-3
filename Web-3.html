@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Advantour Turkmenistan | Путешествия по Туркменистану</title>
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins + Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fefcf5;
+            color: #1e2a2e;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .logo, .nav-links a, .btn, .card-title {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Animations + Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Nav */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 32px;
+            background: rgba(255, 252, 240, 0.96);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #b8860b, #cd7f32);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c3e2f;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #b8860b;
+            transform: translateY(-2px);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+            background: #c49a6c;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #c49a6c;
+            color: #c49a6c;
+        }
+
+        .btn-outline:hover {
+            background: #c49a6c;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .btn-primary {
+            background: #b87333;
+            box-shadow: 0 8px 20px rgba(184,115,51,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #9b5e2c;
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(120deg, #fff7e8, #fff0dc);
+            padding: 70px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5672f, #d49c6c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #4a5b4e;
+            max-width: 650px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Cards grid (туры) */
+        .section-title {
+            font-size: 2.2rem;
+            margin: 50px 0 20px;
+            text-align: center;
+            font-weight: 700;
+            color: #2d3e2b;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+        }
+
+        .tour-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-12px) scale(1.01);
+            box-shadow: 0 30px 40px -12px rgba(0,0,0,0.2);
+        }
+
+        .card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s;
+        }
+
+        .tour-card:hover .card-img {
+            transform: scale(1.03);
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .location {
+            color: #c47b3e;
+            font-weight: 500;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .price {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #b96f30;
+            margin: 12px 0;
+        }
+
+        .book-btn {
+            width: 100%;
+            margin-top: 8px;
+            background: #e7cba5;
+            color: #4b2e1a;
+            border-radius: 60px;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .book-btn:hover {
+            background: #d6b17e;
+        }
+
+        /* Почему доверяют */
+        .trust-section {
+            background: #f6efdf;
+            border-radius: 60px;
+            padding: 40px 30px;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .trust-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 30px;
+        }
+
+        .trust-item {
+            background: white;
+            border-radius: 40px;
+            padding: 28px 20px;
+            width: 220px;
+            transition: 0.3s;
+        }
+
+        .trust-item i {
+            font-size: 2.5rem;
+            color: #c49a6c;
+        }
+
+        /* Отзывы */
+        .reviews {
+            background: #fffcf0;
+            padding: 40px 0;
+            border-radius: 48px;
+            margin: 40px 0;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        /* Контакты + соцсети */
+        .contact-bar {
+            background: #2e3b2c;
+            color: #f9e7c2;
+            border-radius: 50px;
+            padding: 32px 28px;
+            margin: 50px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contact-info a {
+            color: #ffd966;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 1.5rem;
+            transition: 0.2s;
+        }
+
+        .contact-info a:hover {
+            transform: scale(1.1);
+            display: inline-block;
+            color: #ffb347;
+        }
+
+        .contact-details p {
+            margin: 8px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            border-top: 1px solid #ddd8c8;
+            margin-top: 30px;
+            font-size: 0.85rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px;
+            }
+            .nav-links {
+                gap: 18px;
+                justify-content: center;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .contact-bar {
+                flex-direction: column;
+                text-align: center;
+                border-radius: 32px;
+            }
+            .btn {
+                padding: 8px 20px;
+            }
+            .cards-grid {
+                gap: 20px;
+            }
+        }
+
+        /* Destinations extra block исправляем дубли */
+        .destinations-alt {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin: 40px 0;
+        }
+        .dest-card {
+            background: #ffffffd9;
+            border-radius: 28px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+        }
+        .whatsapp-link, .insta-link {
+            background: #25D366;
+            padding: 6px 12px;
+            border-radius: 40px;
+            color: white;
+            font-size: 0.9rem;
+        }
+        .insta-link {
+            background: #E4405F;
+        }
+        /* responsive */
+        img {
+            max-width: 100%;
+        }
+        .fake-img {
+            background: #e9dfcd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ab8a54;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <div class="logo"><i class="fas fa-map-marked-alt"></i> CaravanGo</div>
+        <div class="nav-links">
+            <a href="#home">Главная</a>
+            <a href="#tours">Туры</a>
+            <a href="#destinations">Направления</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#contact">Контакты</a>
+        </div>
+        <a href="#contact" class="btn btn-outline">Связаться</a>
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section id="home" class="hero reveal">
+        <div class="container">
+            <h1>Открой Туркменистан <br> с сердцем Каравана</h1>
+            <p>Древний Мерв, подземные озера Ков-Ата, огонь Дарваза и восточное гостеприимство. Интерактивные маршруты и полное погружение в культуру.</p>
+            <div class="hero-buttons">
+                <a href="#tours" class="btn btn-primary">Выбрать тур</a>
+                <a href="#contact" class="btn btn-outline">Бесплатная консультация</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Our Story -->
+        <div class="reveal" style="margin: 30px 0 20px; text-align: center;">
+            <h2 class="section-title">Наша история: зов странствий и опыт</h2>
+            <p style="max-width: 800px; margin: 0 auto; color: #4a5a40;">Мы не просто турагентство — мы команда, влюбленная в Туркменистан. Организуем путешествия, где каждый маршрут продуман до мелочей, а вы почувствуете магию Великого Шелкового пути.</p>
+        </div>
+
+        <!-- Туры (3 базовых, как на скриншоте но с туркменским колоритом) -->
+        <h2 class="section-title reveal" id="tours">✨ Популярные туры по Туркменистану</h2>
+        <div class="cards-grid">
+            <div class="tour-card reveal">
+                <div class="card-img fake-img" style="background-image: linear-gradient(120deg, #b98f65, #dbb47a); display: flex; align-items: center; justify-content: center; font-size: 2rem;"><i class="fas fa-fire"></i> Дарваза</div>
+                <div class="card-content">
+                    <h3>Врата ада & пустыня</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Дарваза, Ахалский велаят</div>
+                    <div>Длительность: 3 дня / 2 ночи</div>
+                    <div class="price">от $990</div>
+                    <button class="btn book-btn book-trigger" data-trip="Дарваза + Кратер">Забронировать тур</button>
+                </div>
+            </div>
+            <div class="tour-card reveal">
+                <div class="card-img fake-img" style="background-image: linear-gradient(120deg, #bb9a6e, #e9c391); display: flex; align-items: center; justify-content: center; font-size: 2rem;"><i class="fas fa-landmark"></i> Мерв</div>
+                <div class="card-content">
+                    <h3>Древний Мерв</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Марыйский велаят, ЮНЕСКО</div>
+                    <div>Длительность: 4 дня</div>
+                    <div class="price">$1 250</div>
+                    <button class="btn book-btn book-trigger" data-trip="Исторический Мерв">Бронировать</button>
+                </div>
+            </div>
+            <div class="tour-card reveal">
+                <div class="card-img fake-img" style="background-image: linear-gradient(120deg, #cbae87, #f4ddb5); display: flex; align-items: center; justify-content: center; font-size: 2rem;"><i class="fas fa-water"></i> Ков-Ата</div>
+                <div class="card-content">
+                    <h3>Подземное озеро Ков-Ата</h3>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Бахарлы, гора Ха-джы</div>
+                    <div>Длительность: 2 дня (+пещеры)</div>
+                    <div class="price">$780</div>
+                    <button class="btn book-btn book-trigger" data-trip="Ков-Ата и каньоны">Записаться</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Доп направления: Explore Stunning Destinations (туркменский стиль)-->
+        <h2 class="section-title reveal" id="destinations">🌟 Удивительные направления</h2>
+        <div class="destinations-alt reveal">
+            <div class="dest-card"><i class="fas fa-archway" style="font-size: 2rem; color:#c68b46;"></i><h3>Ашхабад — столица из мрамора</h3><p>Дворец Огузхана, монумент независимости</p><span class="price">от $420</span><button class="btn book-trigger" style="margin-top: 12px; background: #e6c394;" data-trip="Экскурсия по Ашхабаду">Узнать</button></div>
+            <div class="dest-card"><i class="fas fa-mountain" style="font-size: 2rem; color:#c68b46;"></i><h3>Каньоны Кугитанг</h3><p>Динозавры плато, ущелье Узбой</p><span class="price">$1050 / 4 дня</span><button class="btn book-trigger" style="margin-top: 12px; background: #e6c394;" data-trip="Каньоны Кугитанг">Детали</button></div>
+            <div class="dest-card"><i class="fas fa-tents" style="font-size: 2rem; color:#c68b46;"></i><h3>Ночлег в пустыне Каракумы</h3><p>Верблюды, звездное небо, фольклор</p><span class="price">$590</span><button class="btn book-trigger" style="margin-top: 12px; background: #e6c394;" data-trip="Ночь в Каракумах">Забронировать</button></div>
+        </div>
+
+        <!-- Why Travelers Trust Us -->
+        <div class="trust-section reveal">
+            <h3>Почему путешественники доверяют нам?</h3>
+            <div class="trust-grid">
+                <div class="trust-item"><i class="fas fa-passport"></i><h4>Визовая поддержка</h4><p>Бесплатное консультирование по въезду в Туркменистан</p></div>
+                <div class="trust-item"><i class="fas fa-hand-holding-heart"></i><h4>24/7 поддержка</h4><p>Русскоязычные гиды и оперативная связь</p></div>
+                <div class="trust-item"><i class="fas fa-map-marked-alt"></i><h4>Авторские маршруты</h4><p>Уникальные локации + трансфер</p></div>
+            </div>
+        </div>
+
+        <!-- Отзывы Traveler Stories -->
+        <div id="reviews" class="reviews reveal">
+            <h3 class="section-title" style="margin-top: 0;">❤️ Истории наших путешественников</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center;">
+                <div class="review-card" style="flex:1; min-width: 250px;"><i class="fas fa-star" style="color:#f5b042;"></i> <strong>Незабываемое приключение</strong><br>“Организация тура в Дарвазу была идеальной. Спали в юртах, смотрели на огненный кратер - магия!”<br>- <em>Алексей, travel blogger</em></div>
+                <div class="review-card" style="flex:1; min-width: 250px;"><i class="fas fa-star" style="color:#f5b042;"></i> <strong>Лучший гид в Мерве</strong><br>“Гид рассказал легенды древнего города, а также помог с местной кухней. Огромное спасибо!”<br>- <em>Елена С.</em></div>
+                <div class="review-card" style="flex:1; min-width: 250px;"><i class="fas fa-star" style="color:#f5b042;"></i> <strong>Ков-Ата впечатлило</strong><br>“Плавали в пещерном озере, температура 33°C. Анимации, комфорт — всё на высоте.”<br>- <em>Максим и Алия</em></div>
+            </div>
+        </div>
+
+        <!-- Ready to embark -->
+        <div class="reveal" style="text-align: center; background: #f0e7d6; border-radius: 60px; padding: 40px 20px; margin: 40px 0;">
+            <h3>Готовы отправиться в путешествие всей мечты?</h3>
+            <p style="margin: 15px 0;">Подарите себе незабываемый отдых с CaravanGo. Начните планировать уже сегодня!</p>
+            <a href="#contact" class="btn btn-primary">Посетить сайт →</a>
+        </div>
+
+        <!-- Контактный блок с соцсетями, email, телефон (WhatsApp, Instagram) -->
+        <div id="contact" class="contact-bar reveal">
+            <div>
+                <h3><i class="fas fa-phone-alt"></i> Свяжитесь с нами</h3>
+                <div class="contact-info" style="margin-top: 12px;">
+                    <a href="https://wa.me/99312345678" target="_blank" class="whatsapp-link" style="background:#25D366; display: inline-block; border-radius: 40px; padding: 8px 16px; font-size: 0.9rem; color:white;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://instagram.com/caravangotm" target="_blank" class="insta-link" style="background:#E4405F; display: inline-block; border-radius: 40px; padding: 8px 16px; font-size: 0.9rem; color:white;"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="mailto:tourism@caravango.tm" style="color:#ffdfa5; font-size: 1rem; margin-left: 6px;"><i class="fas fa-envelope"></i> tourism@caravango.tm</a>
+                </div>
+            </div>
+            <div class="contact-details">
+                <p><i class="fas fa-phone"></i> Телефон: +993 12 45 67 89</p>
+                <p><i class="fab fa-telegram"></i> Telegram: @caravango_asia</p>
+                <p><i class="fas fa-clock"></i> Пн-Пт: 9:00 - 19:00 (GMT+5)</p>
+            </div>
+        </div>
+
+        <!-- Доп футер с компанией akurtu / skyaura адаптация -->
+        <div style="background: #ebe1cf; border-radius: 36px; padding: 30px 20px; margin: 30px 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+            <div><strong>SKYAURA</strong><br>Доступные авиабилеты по всему миру<br><i class="fas fa-plane"></i> <a href="#" style="color:#7a541e;">skyaura.com</a></div>
+            <div><strong>Компания Akurtu</strong><br>www.akurtu.com   |   info@akurtu.com</div>
+            <div><strong>Контакты</strong><br>Email: info@caravango.tm<br>Fax: +993 (12) 987654</div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>© 2025 CaravanGo Turkmenistan — Туристическое агентство. Все права защищены.</p>
+    <p style="margin-top: 5px;"><i class="fas fa-heart" style="color:#c2854b;"></i> Путешествуйте с душой по Туркменистану</p>
+</footer>
+
+<script>
+    // Scroll reveal + анимации
+    const revealElements = document.querySelectorAll('.reveal');
+    function checkReveal() {
+        const windowHeight = window.innerHeight;
+        revealElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < windowHeight - 80) {
+                el.classList.add('active');
+            }
+        });
+    }
+    window.addEventListener('scroll', checkReveal);
+    window.addEventListener('load', checkReveal);
+    
+    // Кликабельные кнопки book-trigger (имитация отправки / переход на контакты)
+    const bookBtns = document.querySelectorAll('.book-trigger');
+    bookBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tripName = this.getAttribute('data-trip') || 'тур';
+            alert(`Спасибо за интерес к туру "${tripName}"!\nНаш менеджер свяжется с вами в WhatsApp или по телефону. \nИли напишите нам в Instagram / WhatsApp, чтобы подтвердить бронирование.`);
+            // Плавный скролл к контактам не навязчиво
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+    
+    // Добавим также hover анимации для карточек и дополнительных ссылок
+    const allCards = document.querySelectorAll('.tour-card, .dest-card, .review-card, .trust-item');
+    allCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-6px)';
+            card.style.transition = '0.25s';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0px)';
+        });
+    });
+    
+    // Добавляем поддержку Nav ссылок для плавной прокрутки
+    document.querySelectorAll('.nav-links a, .hero-buttons a[href^="#"], .btn[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetElem = document.getElementById(targetId);
+                if(targetElem) {
+                    targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+    
+    // кнопка "Связаться" на навбаре плавно
+    const contactNav = document.querySelector('.navbar .btn-outline');
+    if(contactNav) {
+        contactNav.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+    
+    // обработчик для "Посетить сайт"
+    const visitBtn = document.querySelector('.ready-section .btn-primary');
+    if(visitBtn) visitBtn.addEventListener('click', (e)=> {e.preventDefault(); document.getElementById('contact').scrollIntoView({behavior:'smooth'});});
+    
+    // обработчик кнопок "Забронировать тур"/ Book Trip
+    const allBookBtns = document.querySelectorAll('.book-btn');
+    allBookBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            let tripText = '';
+            const parentCard = this.closest('.tour-card');
+            if(parentCard) {
+                const title = parentCard.querySelector('h3')?.innerText || 'тур';
+                tripText = title;
+            } else {
+                tripText = 'выбранный тур';
+            }
+            alert(`✅ Заявка на "${tripText}" принята! Наши специалисты свяжутся с вами через WhatsApp или по почте.`);
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+    
+    // Дополнительная анимация - при загрузке активировать видимые блоки
+    setTimeout(() => {
+        checkReveal();
+    }, 150);
+</script>
+</body>
+</html>
